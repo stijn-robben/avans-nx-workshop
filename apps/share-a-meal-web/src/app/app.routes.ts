@@ -1,16 +1,19 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { Route } from '@angular/router';
-import { MealDetailComponent } from 'libs/share-a-meal/features/src/lib/meal/meal-detail/meal-detail.component';
+import { AboutComponent } from 'libs/share-a-meal/features/src/lib/about/about.component';
+import { HomeComponent } from 'libs/share-a-meal/features/src/lib/home/home.component';
+
 
 export const appRoutes: Route[] = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        component: HomeComponent,
         pathMatch: 'full'
     },
     {
-        path: 'dashboard',
-        pathMatch: 'full',
-        component: MealDetailComponent,
+        path: 'about',
+        component: AboutComponent,
+        pathMatch: 'full'
     }
+    
 ];
