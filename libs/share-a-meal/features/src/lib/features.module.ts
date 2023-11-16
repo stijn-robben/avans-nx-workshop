@@ -9,7 +9,7 @@ import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { MenuItemListComponent } from './menuitem/menuitem-list/menuitem-list.component';
-import { MenuitemDetailComponent } from './menuitem/menuitem-detail/menuitem-detail.component';
+import { MenuItemDetailComponent } from './menuitem/menuitem-detail/menuitem-detail.component';
 import { MenuItemService } from './menuitem/menuitem.service';
 
 
@@ -22,7 +22,7 @@ import { MenuItemService } from './menuitem/menuitem.service';
     UserComponent,
     HomeComponent,
     MenuItemListComponent,
-    MenuitemDetailComponent,
+    MenuItemDetailComponent,
   ],
   providers: [MealService, MenuItemService],
   exports: [
@@ -31,7 +31,7 @@ import { MenuItemService } from './menuitem/menuitem.service';
     AboutComponent,
     HomeComponent,
     MenuItemListComponent,
-    MenuitemDetailComponent
+    MenuItemDetailComponent
   ],
 })
 export class FeaturesModule {}

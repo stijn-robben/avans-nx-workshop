@@ -1,6 +1,23 @@
-<p>menuitem list works!</p>
-<div *ngFor="let menuitem of menuitem">
-    <h2>{{ menuitem.name }}</h2>
-    <p>Price: {{ menuitem.price }}</p>
-    <p>Img: {{ menuitem.img_url}}</p>
+
+<div class="bg-dark-yellow">
+    <div class="py-5 heading text-center">
+        <h2>Menu</h2>
+    </div>
+    <div class="container col-md-12 story">
+        <div class="row">
+            <div *ngFor="let menuitem of menuitem" class="col-lg-4 col-md-12 col-sm-12 pt-4">
+                <a   [routerLink]="['./', menuitem.id]" routerLinkActive="active">
+                    <div class="card-without-bottom">
+                        <div class="card-body">
+                            <div>
+                            <img src={{menuitem.img_url}} width="100%" class="rounded-3">
+                            <h4 class="pt-3 card-title">{{menuitem.name}}</h4>
+                            <p class="card-text">€{{menuitem.price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

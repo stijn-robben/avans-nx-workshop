@@ -58,6 +58,10 @@ h4 {
     text-decoration: none;
 }
 
+a {
+    text-decoration: none; /* Remove underline */
+}
+
 .container {
     --bs-gutter-x: 17% !important;
 }
@@ -257,7 +261,7 @@ button.btn-primary:active::before {
 
 .card-without-bottom {
     background-color: var(--color1);
-    min-height: 300px;
+    min-height: 350px;
     color: var(--color5);
     padding: 0.63em 1em;
     background: var(--color1);
