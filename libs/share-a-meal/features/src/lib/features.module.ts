@@ -8,6 +8,9 @@ import { AboutComponent } from './about/about.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
+import { MenuItemListComponent } from './menuitem/menuitem-list/menuitem-list.component';
+import { MenuitemDetailComponent } from './menuitem/menuitem-detail/menuitem-detail.component';
+import { MenuItemService } from './menuitem/menuitem.service';
 
 
 @NgModule({
@@ -18,8 +21,17 @@ import { RouterModule } from '@angular/router';
     AboutComponent,
     UserComponent,
     HomeComponent,
+    MenuItemListComponent,
+    MenuitemDetailComponent,
   ],
-  providers: [MealService],
-  exports: [MealListComponent, MealDetailComponent, AboutComponent, HomeComponent],
+  providers: [MealService, MenuItemService],
+  exports: [
+    MealListComponent,
+    MealDetailComponent,
+    AboutComponent,
+    HomeComponent,
+    MenuItemListComponent,
+    MenuitemDetailComponent
+  ],
 })
 export class FeaturesModule {}
