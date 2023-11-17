@@ -22,9 +22,12 @@ export const appRoutes: Route[] = [
         pathMatch: 'full'
     },
     {
-        path: 'menu:id',
+        path: 'menu/:id',
         component: MenuItemDetailComponent,
         pathMatch: 'full'
+    },{
+        path: '**',
+        component: HomeComponent,
+        pathMatch: 'full'
     }
-    
 ];
