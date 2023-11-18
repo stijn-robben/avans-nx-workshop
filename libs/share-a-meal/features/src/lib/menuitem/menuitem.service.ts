@@ -46,19 +46,33 @@ export class MenuItemService {
    * Get a single item from the service.
    *
    */
+  // public read(id: string | null, options?: any): Observable<IMenuItem> {
+  //   console.log(`read ${this.endpoint}`);
+  //   return this.http
+  //     .get<ApiResponse<IMenuItem>>(this.endpoint, {
+  //       ...options,
+  //       ...httpOptions,
+  //     })
+  //     .pipe(
+  //       tap(console.log),
+  //       map((response: any) => response.results as IMenuItem),
+  //       catchError(this.handleError)
+  //     );
+  // }
   public read(id: string | null, options?: any): Observable<IMenuItem> {
-    console.log(`read ${this.endpoint}`);
+    const url = this.endpoint + '/' + id;
+    console.log(`read ${url}`);
     return this.http
-      .get<ApiResponse<IMenuItem>>(this.endpoint, {
-        ...options,
-        ...httpOptions,
-      })
-      .pipe(
-        tap(console.log),
-        map((response: any) => response.results as IMenuItem),
-        catchError(this.handleError)
-      );
-  }
+        .get<ApiResponse<IMenuItem>>(url, {
+            ...options,
+            ...httpOptions,
+        })
+        .pipe(
+            tap(console.log),
+            map((response: any) => response.results as IMenuItem  ),
+            catchError(this.handleError)
+        );
+}
 
   /**
    * Handle errors.

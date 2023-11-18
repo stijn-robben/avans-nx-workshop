@@ -162,8 +162,57 @@ button {
     font-family: inherit;
 }
 
+button.btn-secondary {
+    color: var(--color5);
+    padding: 0.63em 1em;
+    background: var(--color1);
+    border: 2px solid var(--color5);
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    font-size:20px;
+    font-family: var(--font2);
+    --bs-btn-active-bg: transparent !important;
+    --bs-btn-active-border-color: var(--color1) !important;
+}
+button.btn-secondary:hover {
+    color: var(--color1);
+    padding: 0.63em 1em;
+    background: var(--color1);
+    border: 2px solid var(--color5);
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    font-size:20px;
+    font-family: var(--font2);
+    --bs-btn-active-bg: transparent !important;
+    --bs-btn-active-border-color: var(--color1) !important;
+    background: var(--color5);
+}
 
-
+button.btn-third{
+    color: var(--color1);
+    padding: 0.63em 1em;
+    background: var(--color5);
+    border: 2px solid var(--color5);
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    font-size:20px;
+    font-family: var(--font2);
+    --bs-btn-active-bg: transparent !important;
+    --bs-btn-active-border-color: var(--color1) !important;
+}
+button.btn-third:hover {
+    color: var(--color5);
+    padding: 0.63em 1em;
+    background: var(--color1);
+    border: 2px solid var(--color5);
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    font-size:20px;
+    font-family: var(--font2);
+    --bs-btn-active-bg: transparent !important;
+    --bs-btn-active-border-color: var(--color1) !important;
+    background: var(--color1);
+}
 /*button top layer*/
 button.btn-primary {
     font-weight: 600;
@@ -223,6 +272,18 @@ button.btn-primary:active::before {
     height: 50px;
 }
 
+.bg-bridge-4 {
+    background-image: url(./assets/img/bridge-4.jpg);
+    background-size:auto;
+    height: 50px;
+}
+
+.bg-bridge-5 {
+    background-image: url(./assets/img/bridge-5.jpg);
+    background-size:auto;
+    height: 50px;
+}
+
 
 .story p, .menu p {
     color: var(--color5);
@@ -242,6 +303,7 @@ button.btn-primary:active::before {
     border: 2px solid var(--color5);
     border-radius: 0.75em;
     transform-style: preserve-3d;
+    
 }
 /*add bottom layer*/
 .card::before {
@@ -268,6 +330,15 @@ button.btn-primary:active::before {
     border: 2px solid var(--color5);
     border-radius: 0.75em;
     transform-style: preserve-3d;
+    
+}
+
+
+.card-body p {
+    overflow-wrap: break-word; /* Allow the text to break into multiple lines */
+    white-space: pre-line;
+    margin-bottom: 10px; /* Add margin to separate paragraphs */
+
 }
 
 
