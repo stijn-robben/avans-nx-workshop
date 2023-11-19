@@ -12,9 +12,11 @@ import { MenuItemListComponent } from './menuitem/menuitem-list/menuitem-list.co
 import { MenuItemDetailComponent } from './menuitem/menuitem-detail/menuitem-detail.component';
 import { MenuItemService } from './menuitem/menuitem.service';
 import { MenuItemEditComponent } from './menuitem/menuitem-edit/menuitem-edit.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
   declarations: [
     MealListComponent,
     MealDetailComponent,

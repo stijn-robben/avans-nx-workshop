@@ -1,46 +1,46 @@
 <div class="bg-dark-yellow">
     <div class="container">
-        <div class="col-lg-12 col-md-12 col-sm-12 pt-4">
-            <div class="row pt-4">
+        <div class="col-lg-12 col-md-12 col-sm-12 py-4 pb-5">
+            <div class="row pt-4 pb-5">
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    
                     <form>
                         <div class="mb-3">
-                        <input type="text" class="form-control form-component form-label" id="name" placeholder="Name:" value={{menuitem?.name}}>
+                            <input type="text" class="form-control form-component form-label" id="name" placeholder="Name:" [(ngModel)]="menuitem.name" name="name">
                         </div>
                         <div class="mb-3">
-                            <textarea type="text" class="form-control form-component form-label" id="description" placeholder="Description:" rows="4" value={{menuitem?.description}}></textarea>
+                            <textarea class="form-control form-component form-label" id="description" placeholder="Description:" rows="4" [(ngModel)]="menuitem.description" name="description"></textarea>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control form-component form-label" id="price" placeholder="Price:" value={{menuitem?.price}}>
+                            <input type="number" class="form-control form-component form-label" id="price" placeholder="Price:" [(ngModel)]="menuitem.price" name="price">
                         </div>
-                        <select class="form-component form-select form-label mb-3">
+                        <select class="form-component form-select form-label mb-3" [(ngModel)]="menuitem.item_type" name="type" value={{menuitem.item_type}}>
                             <option selected>Select a type</option>
-                            <option value="1">Burger</option>
-                            <option value="2">Side</option>
-                            <option value="3">Drink</option>
+                            <option value="burger">Burger</option>
+                            <option value="side">Side</option>
+                            <option value="drink">Drink</option>
                         </select>
                         <div class="mb-3">
-                            <input type="url" class="form-control form-component form-label" id="img_url" placeholder="Image URL:" value={{menuitem?.img_url}}>
+                            <input type="url" class="form-control form-component form-label" id="img_url" placeholder="Image URL:" [(ngModel)]="menuitem.img_url" name="img_url">
                         </div>
                         <div class="mb-3">
-                            <textarea type="text" class="form-control form-component form-label" id="ingredients" placeholder="Ingredients: (seperate every ingredient with a comma. e.g 'lettuce,tomato')" rows="2" value={{menuitem?.ingredients}}></textarea>
+                            <textarea class="form-control form-component form-label" id="ingredients" placeholder="Ingredients: (separate every ingredient with a comma. e.g 'lettuce,tomato')" rows="2" [(ngModel)]="menuitem.ingredients" name="ingredients"></textarea>
                         </div>
                         <div class="mb-3">
-                            <textarea type="text" class="form-control form-component form-label" id="allergens" placeholder="Allergens: (seperate every allergen with a comma. e.g 'dairy,egg')" rows="2" value={{menuitem?.allergens}}></textarea>
+                            <textarea class="form-control form-component form-label" id="allergens" placeholder="Allergens: (separate every allergen with a comma. e.g 'dairy,egg')" rows="2" [(ngModel)]="menuitem.allergens" name="allergens"></textarea>
                         </div>
                         <button type="submit" class="btn btn-secondary" (click)="save()">Submit</button>
-                        <button type="submit" class="btn btn-secondary mx-3" (click)="cancel()">Cancel</button>
+                        <button type="button" class="btn btn-secondary mx-3" (click)="cancel()">Cancel</button>
                     </form>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="card-without-bottom">
-                        <!--JSON preview-->
+                        <pre class="stop-overflowing">{{ menuitem | json }}</pre>
                     </div>
                 </div>
             </div>
         </div>
-    
+    </div>
+    <div class="bg-bridge-5">
+
     </div>
 </div>
-

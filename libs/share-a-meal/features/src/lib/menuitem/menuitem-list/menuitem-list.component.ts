@@ -16,7 +16,6 @@ export class MenuItemListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.menuitemService.list().subscribe((results) => {
-            console.log(`results: ${results}`);
             this.menuitem = results;
         });
     }

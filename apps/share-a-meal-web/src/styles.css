@@ -360,7 +360,10 @@ button.btn-primary:active::before {
 
 }
 
-
+.stop-overflowing{
+    overflow-wrap: break-word; /* Allow the text to break into multiple lines */
+    white-space: pre-line;
+}
 .card-jumbotron {
     min-height:0;
 }
