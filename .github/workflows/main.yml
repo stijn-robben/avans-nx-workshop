@@ -69,7 +69,7 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
 
-  deploy-backend-api:
+  deploy-data-api:
     runs-on: ubuntu-latest
     needs: build
     environment:
