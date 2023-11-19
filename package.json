@@ -2,7 +2,9 @@
   "name": "@avans-nx-workshop/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build avans-nx-workshop"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~16.2.0",
