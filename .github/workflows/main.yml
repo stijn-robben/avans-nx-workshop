@@ -37,7 +37,7 @@ jobs:
           name: share-a-meal-web
           path: share-a-meal-web-release.zip
           
-      - name: Upload backend-api artifact for deployment job
+      - name: Upload data-api artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: data-api-release
