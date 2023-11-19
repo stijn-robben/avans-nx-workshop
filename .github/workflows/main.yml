@@ -81,10 +81,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: data-api-release
-          path: ${{ github.workspace }}/data-api-release.zip
+          path: ${{ github.workspace }}
 
       - name: Unzip artifact for deployment
-        run: unzip ${{ github.workspace }}/data-api-release.zip -d ${{ github.workspace }}
+        run: unzip ${{ github.workspace }}/data-api-release/data-api-release.zip -d ${{ github.workspace }}/data-api-release
 
       - name: Change to the data-api directory
         run: cd ${{ github.workspace }}/data-api-release
@@ -100,3 +100,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }}
           package: .
+
