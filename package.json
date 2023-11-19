@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx build avans-nx-workshop"
+    "build": "nx run avans-nx-workshop:build"
   },
   "private": true,
   "dependencies": {
