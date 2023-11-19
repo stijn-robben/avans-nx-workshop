@@ -29,7 +29,7 @@ export class MenuItemService {
         },{
             id: "2",
             name: "Jalapeño burger",
-            description: "Savor the heat with our Jalapeño Burger featuring a flavorful beef patty, crisp lettuce, juicy tomato, tangy onion, pickles, melted cheese, and a spicy kick from fresh jalapeños, all nestled in a soft bun.",
+            description: "Savor the heat with our Jalapeño Burger featuring a flavorful beef patty, crisp lettuce, juicy tomato, tangy onion, pickles, melted cheese, and a spicy kick from fresh jalapeños, all nestled in a soft bun!",
             price: 7.49,
             item_type: "burger",
             ingredients: ["beef patty", "lettuce", "tomato", "onion", "pickles", "cheese", "jalapeño"],
