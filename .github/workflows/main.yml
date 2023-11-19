@@ -74,13 +74,14 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-frontend-app.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: data-api
+          name: data-api-release   # Update this line to match the correct artifact name
+          path: ${GITHUB_WORKSPACE}  # Add this line to specify the target path for the downloaded artifact
 
       - name: Unzip artifact for deployment
         run: unzip data-api-release.zip
