@@ -60,14 +60,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip frontend-app-release.zip
 
-      - name: Debug Directory Structure
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "Contents of the workspace:"
-          ls -R
-          echo "Contents of the frontend app directory:"
-          ls -R ${GITHUB_WORKSPACE}/apps/share-a-meal-web
-
       - name: Deploy to static Azure web app
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -75,7 +67,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.ANGULAR_PUBLISHTOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "apps/share-a-meal-web"
+          app_location: "./src/app"
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
 
