@@ -14,33 +14,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '18.x'
 
-      - name: Install dependencies, build, and test
+      - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
-
       - name: Zip artifacts for deployment
         run: |
-          cd ${GITHUB_WORKSPACE}/apps/data-api/ && zip -r ${GITHUB_WORKSPACE}/data-api-release.zip ./*
-          cd ${GITHUB_WORKSPACE}/apps/share-a-meal-web/ && zip -r ${GITHUB_WORKSPACE}/share-a-meal-web-release.zip ./*
-
+          echo ${GITHUB_WORKSPACE}
+          cd ${GITHUB_WORKSPACE}/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/apps/share-a-meal-web/ && zip ${GITHUB_WORKSPACE}/share-a-meal-web-release.zip ./* -r
       - name: Upload frontend-app artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: share-a-meal-web
           path: share-a-meal-web-release.zip
           
       - name: Upload data-api artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: data-api-release
           path: data-api-release.zip
@@ -53,7 +51,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: share-a-meal-web
 
@@ -81,7 +79,7 @@ jobs:
   
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: data-api-release
           path: ${{ github.workspace }}/data-api-release
