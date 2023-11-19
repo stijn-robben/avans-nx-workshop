@@ -84,7 +84,7 @@ jobs:
           path: ${{ github.workspace }}/data-api-release.zip
 
       - name: Unzip artifact for deployment
-        run: unzip ${{ github.workspace }}/data-api-release.zip -d ${{ github.workspace }}/data-api-release
+        run: unzip ${{ github.workspace }}/data-api-release.zip -d ${{ github.workspace }}
 
       - name: Change to the data-api directory
         run: cd ${{ github.workspace }}/data-api-release
