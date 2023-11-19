@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MenuItemListComponent } from './menuitem/menuitem-list/menuitem-list.component';
 import { MenuItemDetailComponent } from './menuitem/menuitem-detail/menuitem-detail.component';
 import { MenuItemService } from './menuitem/menuitem.service';
-
+import { MenuItemEditComponent } from './menuitem/menuitem-edit/menuitem-edit.component';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterModule],
@@ -23,6 +23,7 @@ import { MenuItemService } from './menuitem/menuitem.service';
     HomeComponent,
     MenuItemListComponent,
     MenuItemDetailComponent,
+    MenuItemEditComponent,
   ],
   providers: [MealService, MenuItemService],
   exports: [
@@ -31,7 +32,7 @@ import { MenuItemService } from './menuitem/menuitem.service';
     AboutComponent,
     HomeComponent,
     MenuItemListComponent,
-    MenuItemDetailComponent
+    MenuItemDetailComponent,
   ],
 })
 export class FeaturesModule {}

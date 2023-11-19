@@ -3,17 +3,23 @@ import { Route } from '@angular/router';
 import { AboutComponent } from 'libs/share-a-meal/features/src/lib/about/about.component';
 import { HomeComponent } from 'libs/share-a-meal/features/src/lib/home/home.component';
 import { MenuItemDetailComponent } from 'libs/share-a-meal/features/src/lib/menuitem/menuitem-detail/menuitem-detail.component';
+import { MenuItemEditComponent } from 'libs/share-a-meal/features/src/lib/menuitem/menuitem-edit/menuitem-edit.component';
 import { MenuItemListComponent } from 'libs/share-a-meal/features/src/lib/menuitem/menuitem-list/menuitem-list.component'
 
 export const appRoutes: Route[] = [
     {
-        path: '',
-        component: HomeComponent,
+        path: 'menu/new',
+        component: MenuItemEditComponent,
         pathMatch: 'full'
     },
     {
-        path: 'about',
-        component: AboutComponent,
+        path: 'menu/edit/:id',
+        component: MenuItemEditComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'menu/:id',
+        component: MenuItemDetailComponent,
         pathMatch: 'full'
     },
     {
@@ -22,10 +28,16 @@ export const appRoutes: Route[] = [
         pathMatch: 'full'
     },
     {
-        path: 'menu/:id',
-        component: MenuItemDetailComponent,
+        path: 'about',
+        component: AboutComponent,
         pathMatch: 'full'
-    },{
+    },
+    {
+        path: '',
+        component: HomeComponent,
+        pathMatch: 'full'
+    },
+    {
         path: '**',
         component: HomeComponent,
         pathMatch: 'full'

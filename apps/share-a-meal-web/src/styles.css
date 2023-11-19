@@ -10,6 +10,11 @@
     src: url(./assets/fonts/Cubano.ttf);
 }
 
+img {
+    pointer-events: none;
+}
+
+
 :root {
     --font1: 'Inter';
     --font2: 'Cubano';
@@ -286,11 +291,24 @@ button.btn-primary:active::before {
 }
 
 
-.story p, .menu p {
+.story p, .menu p, .form-label{
     color: var(--color5);
     font-family: var(--font1);
     font-size: 1.3em;
     font-weight:600;
+}
+
+.form-label{
+    color: var(--color5);
+    font-family: var(--font1);
+    font-size: 1.0em;
+    font-weight:600;
+}
+
+.form-component{
+    border-color:var(--color5); 
+    border-width: 2px;
+    background-color: var(--color1);
 }
 
 
