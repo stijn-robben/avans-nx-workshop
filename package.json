@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng avans-nx-workshop --prod", 
-    "test": "ng test",
-    "lint": "ng lint"
+    
   },
   "private": true,
   "dependencies": {
