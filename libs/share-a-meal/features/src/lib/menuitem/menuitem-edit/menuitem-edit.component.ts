@@ -49,11 +49,10 @@ export class MenuItemEditComponent implements OnInit, OnDestroy {
     const jsonText = this.convertToJson();
     console.log('JSON Text:', jsonText);
     // You can now send the jsonText to your API or perform other actions as needed
-    this.router.navigate(['../..'], { relativeTo: this.route });
+    this.router.navigate(['/menu']);
   }
 
 
   cancel() {
-    this.router.navigate(['../..'], { relativeTo: this.route });
-  }
+    this.router.navigate(['/menu']);  }
 }
