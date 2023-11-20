@@ -18,7 +18,7 @@ export const httpOptions = {
  */
 @Injectable()
 export class MenuItemService {
-  endpoint = 'http://localhost:3000/api/menuitem';
+  endpoint = 'https://cwfr-stijn-robben.azurewebsites.net/api/menuitem';
 
   constructor(private readonly http: HttpClient) {}
 
