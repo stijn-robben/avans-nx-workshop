@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Display npm version
+        run: npm --version
+      
       - name: List files in the working directory
         run: | 
           ls -R ${GITHUB_WORKSPACE}
