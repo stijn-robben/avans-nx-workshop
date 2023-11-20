@@ -78,8 +78,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd ${GITHUB_WORKSPACE}/apps/data-api
           npm install
-          working-directory: ${GITHUB_WORKSPACE}/apps/data-api
 
 
       - name: 'Deploy to Azure Web App'
