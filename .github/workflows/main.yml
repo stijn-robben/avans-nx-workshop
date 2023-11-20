@@ -78,7 +78,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ${GITHUB_WORKSPACE}/apps/data-api
           npm install
 
 
