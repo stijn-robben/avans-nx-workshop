@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: List files in the working directory
+        run: | 
+          ls -R ${GITHUB_WORKSPACE}
+      
       - name: npm install, build, and test
         run: |
           cd ${GITHUB_WORKSPACE}
