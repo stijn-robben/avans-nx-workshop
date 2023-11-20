@@ -78,7 +78,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ${GITHUB_WORKSPACE}
           npm install
 
       - name: 'Deploy to Azure Web App'
