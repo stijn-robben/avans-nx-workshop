@@ -79,6 +79,8 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          working-directory: ${GITHUB_WORKSPACE}
+
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
