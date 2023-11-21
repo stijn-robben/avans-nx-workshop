@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "nx run share-a-meal-web:build",
-    "build" : "nx run-many -t build",
+    "build" : "nx run-many -t build --generatePackageJson",
     "test": "nx run-many -t test"
   },
   "private": true,
