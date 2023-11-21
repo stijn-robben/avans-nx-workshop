@@ -76,6 +76,10 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip data-api-release.zip
 
+      - name: List files in the working directory
+        run: | 
+          ls -R ${GITHUB_WORKSPACE}
+      
       - name: Install dependencies
         run: |
           cd dist/apps/data-api/
