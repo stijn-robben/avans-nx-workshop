@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IMenuItem } from '@avans-nx-workshop/shared/api';
+import { ApiResponse, IUser } from '@avans-nx-workshop/shared/api';
 import { Injectable } from '@angular/core';
 
 /**
@@ -17,9 +17,9 @@ export const httpOptions = {
  *
  */
 @Injectable()
-export class MenuItemService {
-  //   endpoint = 'http://localhost:3000/api/meal';
-  endpoint = 'https://cwfr-stijn-robben.azurewebsites.net/api/menuitem';
+export class UserService {
+  endpoint = 'http://localhost:3000/api/user';
+  //endpoint = 'https://cwfr-stijn-robben.azurewebsites.net/api/user';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -28,16 +28,16 @@ export class MenuItemService {
    *
    * @options options - optional URL queryparam options
    */
-  public list(options?: any): Observable<IMenuItem[] | null> {
+  public list(options?: any): Observable<IUser[] | null> {
     console.log(`list ${this.endpoint}`);
 
     return this.http
-      .get<ApiResponse<IMenuItem[]>>(this.endpoint, {
+      .get<ApiResponse<IUser[]>>(this.endpoint, {
         ...options,
         ...httpOptions,
       })
       .pipe(
-        map((response: any) => response.results as IMenuItem[]),
+        map((response: any) => response.results as IUser[]),
         tap(console.log),
         catchError(this.handleError)
       );
@@ -60,17 +60,17 @@ export class MenuItemService {
   //       catchError(this.handleError)
   //     );
   // }
-  public read(id: string | null, options?: any): Observable<IMenuItem> {
+  public read(id: string | null, options?: any): Observable<IUser> {
     const url = this.endpoint + '/' + id;
     console.log(`read ${url}`);
     return this.http
-        .get<ApiResponse<IMenuItem>>(url, {
+        .get<ApiResponse<IUser>>(url, {
             ...options,
             ...httpOptions,
         })
         .pipe(
             tap(console.log),
-            map((response: any) => response.results as IMenuItem  ),
+            map((response: any) => response.results as IUser  ),
             catchError(this.handleError)
         );
 }
@@ -79,7 +79,7 @@ export class MenuItemService {
    * Handle errors.
    */
   public handleError(error: HttpErrorResponse): Observable<any> {
-    console.log('handleError in MenuItemService', error);
+    console.log('handleError in UserService', error);
 
     return throwError(() => new Error(error.message));
   }

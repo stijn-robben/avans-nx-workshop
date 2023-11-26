@@ -342,7 +342,6 @@ button.btn-primary:active::before {
 
 .card-without-bottom {
     background-color: var(--color1);
-    min-height: 350px;
     color: var(--color5);
     padding: 0.63em 1em;
     background: var(--color1);
@@ -374,11 +373,23 @@ button.btn-primary:active::before {
 
 /* Voeg een border toe aan alle tabellen en hun cellen */
 .table-bordered {
-    border: 1px solid --color5;
+    background: var(--color1);
+    border-radius: 0.75em;
+    font-size: 17px;
+    font-family: var(--font1);
+    width:100% !important;
+  }
+
+  .table-striped {
+    background: var(--color1);
+    border-radius: 0.75em;
+    font-size: 20px;
+    font-family: var(--font1);
+    width:100% !important;
   }
   
-  /* Optioneel: Verander de kleur van de tabelkop (thead) */
+  /*Verander de kleur van de tabelkop (thead) */
   .table-bordered thead {
-    background-color: var(--color5);
-    color: var(--color1);
+    background-color: var(--color5) !important;
+    color: var(--color1) !important;
   }
