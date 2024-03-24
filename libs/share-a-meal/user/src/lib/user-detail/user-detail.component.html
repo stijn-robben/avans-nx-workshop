@@ -1,0 +1,31 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="flex justify-center items-center h-64">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600"></div>
+  </div>
+
+  <!-- User Profile Card -->
+  <div *ngIf="!loading" class="max-w-2xl mx-auto bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-6">
+      <div class="text-center">
+        <img class="w-32 h-32 mb-4 rounded-full shadow-lg mx-auto" [src]="'assets/user.png'" alt="User Profile Picture">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{user?.firstName}} {{user?.lastName}}</h2>
+        <p class="text-gray-500 dark:text-gray-400">{{user?.emailAddress}}</p>
+        <hr class="my-4 border-gray-300 dark:border-gray-700">
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div><strong class="font-semibold text-gray-600 dark:text-gray-300">Role:</strong> {{user?.role}}</div>
+          <div><strong class="font-semibold text-gray-600 dark:text-gray-300">Birthdate:</strong> {{user?.birthdate | date: 'dd-MM-yyyy' }}</div>
+          <div><strong class="font-semibold text-gray-600 dark:text-gray-300">Postal Code:</strong> {{user?.postalCode}}</div>
+          <div><strong class="font-semibold text-gray-600 dark:text-gray-300">House Number:</strong> {{user?.houseNumber}}</div>
+          <div><strong class="font-semibold text-gray-600 dark:text-gray-300">Phone Number:</strong> {{user?.phoneNumber}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JSON Object Display Section -->
+  <!-- <div class="mt-6 max-w-2xl mx-auto bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden dark:bg-gray-800 dark:border-gray-700 p-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">User JSON Data</h3>
+    <pre class="text-sm text-gray-600 dark:text-gray-400 overflow-x-auto whitespace-pre-wrap">{{ user | json }}</pre>
+  </div> -->
+</div>

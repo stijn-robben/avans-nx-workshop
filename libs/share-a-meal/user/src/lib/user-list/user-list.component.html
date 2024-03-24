@@ -1,0 +1,68 @@
+<div class="container mx-auto px-4 py-4">
+      <!-- Loading Spinner -->
+  <div *ngIf="loading" class="flex justify-center items-center h-64">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600"></div>
+  </div>
+    <!-- New User Button -->
+    <div class="flex justify-end mb-4">
+      <button routerLink="/users/create" class="px-6 py-2 bg-blue-600 text-white text-lg font-medium rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-800">
+        New User
+      </button>
+    </div>
+  
+    <!-- Users Table -->
+    <div  *ngIf="!loading" class="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              User
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Email
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="py-4 px-6">
+              {{ user.firstName }} {{ user.lastName }}
+            </td>
+            <td class="py-4 px-6">
+              {{ user.emailAddress }}
+            </td>
+            <td class="py-4 px-6 text-lg">
+              <div class="flex space-x-2">
+                <!-- Edit Icon -->
+                <button  *ngIf="(IsAdmin$ | async)" routerLink="edit/{{user._id}}" class="p-2 rounded-full text-green-600 hover:bg-green-100" title="Edit User">
+                  <span class="sr-only">Edit</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.5 2.5a2.121 2.121 0 00-3 0L13 4 16 7l1.5-1.5a2.121 2.121 0 000-3zM16 7l-9 9v3h3l9-9v-3z" />
+                  </svg>
+                </button>
+                <!-- Details Icon -->
+                <button routerLink="{{user._id}}/details" class="p-2 rounded-full text-blue-600 hover:bg-blue-100" title="View Details">
+                  <span class="sr-only">Details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7s-8-3.134-8-7 3.582-7 8-7 8 3.134 8 7zM10 18a8 8 0 100-16 8 8 0 000 16z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M10 12a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <!-- Delete Icon -->
+                <button *ngIf="(IsAdmin$ | async)" (click)="deleteUser(user._id)" class="p-2 rounded-full text-red-600 hover:bg-red-100" title="Delete User">
+                  <span class="sr-only">Delete</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M6.5 4A1.5 1.5 0 008 2.5h4A1.5 1.5 0 0013.5 4h-7zm7 2a.5.5 0 01.5.5v.5h1a1 1 0 011 1v1a1 1 0 01-1 1h-1v6a1 1 0 01-1 1H6a1 1 0 01-1-1v-6H4a1 1 0 01-1-1v-1a1 1 0 011-1h1v-.5a.5.5 0 01.5-.5h7zm-7 1v6h6v-6H6.5z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -1,132 +1,111 @@
 import {
     IsNotEmpty,
     IsString,
-    IsBoolean,
+    IsEmail,
+    IsEnum,
     IsOptional,
     IsDate,
-    IsNumber
-} from 'class-validator';
-import {
-    ICreateUser,
-    IUpdateMenuItem,
-    IUpdateUser,
-    IUpsertMenuItem,
-    IUpsertUser,
-} from '@avans-nx-workshop/shared/api';
-
-/**
- * Use the `Pick` utility type to extract only the properties we want for
- * new to-do items
- */
-// 'id' | 'first_name' | 'last_name' | 'password' | 'email' | 'streetname' | 'house_number' | 'date_of_birth' | 'role'
-export class CreateUserDto implements ICreateUser {
-
-
+  } from 'class-validator';
+  import { Type } from 'class-transformer';
+  import { UserRole } from '@avans-nx-workshop/shared/api';
+  import { ApiProperty,ApiPropertyOptional } from '@nestjs/swagger';
+  export class CreateUserDto {
+    @ApiProperty({ example: 'John', description: 'The first name of the user' })
+    @IsNotEmpty()
+    @IsString()
+    firstName!: string;
+  
+    @ApiProperty({ example: 'Doe', description: 'The last name of the user' })
+    @IsNotEmpty()
+    @IsString()
+    lastName!: string;
+  
+    @ApiProperty({ example: 'john.doe@example.com', description: 'The email address of the user' })
+    @IsEmail()
+    emailAddress!: string;
+  
+    @ApiProperty({ example: 'password', description: 'The password of the user', type: 'string' })
+    @IsNotEmpty()
+    @IsString()
+    password!: string;
+  
+    @ApiProperty({ example: '1990-01-01', description: 'The birthdate of the user', type: 'string', format: 'date' })
+    @IsDate()
+    @Type(() => Date) // Ensures that the string is transformed into a Date object
+    birthdate!: Date;
     
+    @ApiProperty({ example: '12345', description: 'The postal code of the user' })
+    @IsNotEmpty()
     @IsString()
+    postalCode!: string;
+  
+    @ApiProperty({ example: '42', description: 'The house number of the user' })
     @IsNotEmpty()
-    first_name!: string;
-
     @IsString()
+    houseNumber!: string;
+  
+    @ApiProperty({ example: '0123456789', description: 'The phone number of the user' })
     @IsNotEmpty()
-    last_name!: string;
-
     @IsString()
-    @IsNotEmpty()
-    password!: string;
-
+    phoneNumber!: string;
+  
+  
+    @ApiProperty({ enum: UserRole, description: 'The role of the user' })
+    @IsEnum(UserRole)
+    role!: UserRole;
+  }
+  
+  export class UpdateUserDto {
+    @ApiPropertyOptional({ example: 'John', description: 'The first name of the user' })
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
-    email!: string;
-
+    firstName?: string;
+  
+    @ApiPropertyOptional({ example: 'Doe', description: 'The last name of the user' })
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
-    streetname!: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    house_number!: number;
-
+    lastName?: string;
+  
+    @ApiPropertyOptional({ example: 'john.doe@example.com', description: 'The email address of the user' })
+    @IsOptional()
+    @IsEmail()
+    emailAddress?: string;
+  
+    @ApiPropertyOptional({ description: 'The password of the user' })
+    @IsOptional()
+    @IsString()
+    password?: string;
+  
+    @ApiPropertyOptional({ example: '1990-01-01', description: 'The birthdate of the user', type: 'string', format: 'date' })
+    @IsOptional()
     @IsDate()
-    @IsNotEmpty()
-    date_of_birth!:Date;
+    @Type(() => Date)
+    birthdate?: Date;
+  
+   
+  
 
+    @ApiPropertyOptional({ example: '12345', description: 'The postal code of the user' })
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
-    role!:string;
-
-}
-
-export class UpsertUserDto implements IUpsertUser {
-
+    postalCode?: string;
+  
+    @ApiPropertyOptional({ example: '42', description: 'The house number of the user' })
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
-    id!: string;
-
+    houseNumber?: string;
+  
+    @ApiPropertyOptional({ example: '0123456789', description: 'The phone number of the user' })
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
-    first_name!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    last_name!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    password!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    email!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    streetname!: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    house_number!: number;
-
-    @IsDate()
-    @IsNotEmpty()
-    date_of_birth!:Date;
-
-    
-    @IsString()
-    @IsNotEmpty()
-    role!:string;
-}
-
-export class UpdateUserDto implements IUpdateUser {
-    @IsString()
-    @IsNotEmpty()
-    first_name!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    last_name!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    password!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    email!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    streetname!: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    house_number!: number;
-
-    @IsDate()
-    @IsNotEmpty()
-    date_of_birth!:Date;
-
-    @IsString()
-    @IsNotEmpty()
-    role!:string;
-}
+    phoneNumber?: string;
+  
+    @ApiPropertyOptional({ enum: UserRole, description: 'The role of the user' })
+    @IsOptional()
+    @IsEnum(UserRole)
+    role?: UserRole;
+  }
+  
+  export class UpsertUserDto extends CreateUserDto {
+    id!: number;
+  }

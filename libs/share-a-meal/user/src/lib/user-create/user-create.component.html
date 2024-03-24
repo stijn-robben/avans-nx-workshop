@@ -1,0 +1,166 @@
+<!-- user-create.component.html -->
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-4xl mx-4 bg-white rounded-lg shadow overflow-hidden">
+    <div class="px-8 py-6">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Create New User</h2>
+      <form (ngSubmit)="onSubmit(ngForm)" #ngForm="ngForm" class="space-y-6 bg-white shadow px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <!-- First Name -->
+      <div>
+        <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" required minlength="3" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <!-- First Name Validation Messages -->
+        <div *ngIf="firstName.invalid && firstName.touched" class="text-red-600 text-sm">
+          <div *ngIf="firstName.errors?.['required']">
+            First name is required.
+          </div>
+          <div *ngIf="firstName.errors?.['minlength']">
+            First name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div>
+        <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" #lastName="ngModel" required minlength="3" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <!-- Last Name Validation Messages -->
+        <div *ngIf="lastName.invalid && lastName.touched" class="text-red-600 text-sm">
+          <div *ngIf="lastName.errors?.['required']">
+            Last name is required.
+          </div>
+          <div *ngIf="lastName.errors?.['minlength']">
+            Last name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Address -->
+      <div>
+        <label for="emailAddress" class="block text-sm font-medium text-gray-700">Email Address</label>
+        <input type="email" id="emailAddress" name="emailAddress" [(ngModel)]="user.emailAddress" #emailAddress="ngModel" required class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <!-- Email Address Validation Messages -->
+        <div *ngIf="emailAddress.invalid && emailAddress.touched" class="text-red-600 text-sm">
+          <div *ngIf="emailAddress.errors?.['required']">
+            Email address is required.
+          </div>
+          <div *ngIf="emailAddress.errors?.['email']">
+            Please enter a valid email address.
+          </div>
+        </div>
+      </div>
+
+  <!-- Password -->
+  <div class="relative">
+    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+    <input [type]="hidePassword ? 'password' : 'text'" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" required minlength="8" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md pr-10">
+    <button 
+      type="button" 
+      (click)="hidePassword = !hidePassword"
+      class="absolute inset-y-11 right-0 pr-3 flex items-center text-sm"
+    >
+      <i [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" class="fas text-gray-700 dark:text-gray-300"></i>
+    </button>
+
+    <!-- Password Validation Messages -->
+    <div *ngIf="password.invalid && password.touched" class="text-red-600 text-sm">
+      <div *ngIf="password.errors?.['required']">
+        Password is required.
+      </div>
+      <div *ngIf="password.errors?.['minlength']">
+        Password must be at least 8 characters long.
+      </div>
+    </div>
+  </div>
+
+
+      <!-- Birthdate -->
+      <div>
+        <label for="birthdate" class="block text-sm font-medium text-gray-700">Birthdate</label>
+        <input type="date" id="birthdate" name="birthdate" [(ngModel)]="user.birthdate" #birthdate="ngModel" required class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <!-- Birthdate Validation Messages -->
+        <div *ngIf="birthdate.invalid && birthdate.touched" class="text-red-600 text-sm">
+          <div *ngIf="birthdate.errors?.['required']">
+            Birthdate is required.
+          </div>
+        </div>
+      </div>
+
+
+  <!-- Postal Code -->
+  <div>
+    <label for="postalCode" class="block text-sm font-medium text-gray-700">Postal Code</label>
+    <input type="text" id="postalCode" name="postalCode" [(ngModel)]="user.postalCode" #postalCode="ngModel" required class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- Postal Code Validation Messages -->
+    <div *ngIf="postalCode.invalid && postalCode.touched" class="text-red-600 text-sm">
+      <div *ngIf="postalCode.errors?.['required']">
+        Postal code is required.
+      </div>
+    </div>
+  </div>
+
+  <!-- House Number -->
+  <div>
+    <label for="houseNumber" class="block text-sm font-medium text-gray-700">House Number</label>
+    <input type="text" id="houseNumber" name="houseNumber" [(ngModel)]="user.houseNumber" #houseNumber="ngModel" required class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- House Number Validation Messages -->
+    <div *ngIf="houseNumber.invalid && houseNumber.touched" class="text-red-600 text-sm">
+      <div *ngIf="houseNumber.errors?.['required']">
+        House number is required.
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone Number -->
+  <div>
+    <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="user.phoneNumber" #phoneNumber="ngModel" required class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- Phone Number Validation Messages -->
+    <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="text-red-600 text-sm">
+      <div *ngIf="phoneNumber.errors?.['required']">
+        Phone number is required.
+      </div>
+    </div>
+  </div>
+
+              <!-- Role -->
+        <div class="sm:col-span-2">
+          <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</span>
+          <div class="flex items-center mb-4">
+              <input id="admin" name="role" type="radio" value="admin" 
+              [(ngModel)]="user!.role"
+              #role="ngModel" 
+              class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 focus:ring-2 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+              [ngClass]="{'is-invalid': role.invalid && role.touched}"
+
+              />
+              <label for="admin" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
+          </div>
+          <div class="flex items-center">
+              <input id="member" name="role" type="radio" value="member" [(ngModel)]="user!.role" #role="ngModel" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 focus:ring-2 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+              <label for="member" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Member</label>
+          </div>
+          <div *ngIf="role.invalid && role.touched" class="text-red-600 text-sm">
+              <div *ngIf="role.errors?.['required']">
+                Selecting a role is required.
+              </div>
+            </div>
+      </div>
+    </div>
+
+     <!-- Submit Button -->
+<button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-50" [disabled]="ngForm.invalid">Register</button>
+
+<!-- Login Link -->
+<p class="text-sm font-light text-gray-500 dark:text-gray-400 text-center mt-6">
+    Already have an account? <a routerLink="../../auth/login" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Login here</a>
+</p>
+
+</form>
+   <!-- JSON Object Display Section -->
+   <!-- <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">User JSON Data</h3>
+    <pre class="text-sm text-gray-600 dark:text-gray-400 overflow-x-auto">{{ user | json }}</pre>
+</div> -->
+  </div>
+</div>

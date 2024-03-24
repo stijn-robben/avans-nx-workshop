@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItemService } from '../menuitem.service';
 import { IMenuItem } from '@avans-nx-workshop/shared/api';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, catchError, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
@@ -9,38 +9,64 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   templateUrl: './menuitem-edit.component.html',
 })
 export class MenuItemEditComponent implements OnInit, OnDestroy {
-  menuitem: IMenuItem = {
-    id: '',
-    item_type: '',
-    description: '',
-    name: '',
-    price: 0,
-    ingredients: [''],
-    allergens: [''],
-    img_url: '',
-  }; // Initialize menuitem with an empty object
+  menuitem: IMenuItem | null = null;
+
   subscription: Subscription | undefined = undefined;
     
   constructor(private route: ActivatedRoute, private menuitemService: MenuItemService, private router: Router) {}
 
   ngOnInit(): void {
-    this.route.paramMap
+    this.subscription = this.route.paramMap
       .pipe(
-        tap((params: ParamMap) => console.log('menuitem.id = ', params.get('id'))),
-        switchMap((params: ParamMap) => this.menuitemService.read(params.get('id'))),
-        tap(console.log)
+        switchMap(params => {
+          const menuitemId = params.get('id');
+          if (menuitemId) {
+            return this.menuitemService.read(menuitemId);
+          } else {
+            return of(undefined); 
+          }
+        }),
+        catchError(error => {
+          console.error('Error fetching menuitem:', error);
+          return of(undefined); 
+        })
       )
-      .subscribe((results) => {
-        this.menuitem = results || {}; // Ensure results is not null or undefined
+      .subscribe(menuItemData => {
+        if (menuItemData) {
+          this.menuitem = menuItemData;
+          console.log('Editing menuitem:', this.menuitem);
+        } else {
+          this.initializeNewMenuItem();
+        }
       });
   }
+  initializeNewMenuItem(): void {
+    this.menuitem = {
+      id: '',
+      item_type: '',
+      description: '',
+      name: '',
+      price: 0,
+      ingredients: [''],
+            allergens: [''],
+      img_url: '',
+
+    };
+    console.log('Setting up new user template');
+  }
+
+
 
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
   private convertToJson(): string {
-    return JSON.stringify(this.menuitem);
+    if (this.menuitem) {
+      return JSON.stringify(this.menuitem);
+    } else {
+      return JSON.stringify({});
+    }
   }
 
 
@@ -56,3 +82,9 @@ export class MenuItemEditComponent implements OnInit, OnDestroy {
   cancel() {
     this.router.navigate(['/menu']);  }
 }
+
+
+  
+  
+
+

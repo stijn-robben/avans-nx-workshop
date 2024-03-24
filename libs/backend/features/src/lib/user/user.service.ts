@@ -1,115 +1,62 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { IUser} from '@avans-nx-workshop/shared/api';
-import { BehaviorSubject } from 'rxjs';
-import { Logger } from '@nestjs/common';
-import { RouterModule } from '@angular/router';
+import { IUser } from '@avans-nx-workshop/shared/api';
+import { Injectable, Logger } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { User, UserDocument } from './user.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { CreateUserDto, UpdateUserDto } from '@avans-nx-workshop/backend/dto';
+
 @Injectable()
 export class UserService {
     TAG = 'UserService';
-// 'id' | 'first_name' | 'last_name' | 'password' | 'email' | 'streetname' | 'house_number' | 'date_of_birth' | 'role'
+    private readonly logger: Logger = new Logger(UserService.name);
 
-    private user$ = new BehaviorSubject<IUser[]>([
-        {
-            id: "0",
-            first_name: "Stijn",
-            last_name: "Robben",
-            password: "stijnswachtwoord",
-            email: "stijnrobben@outlook.com",
-            streetname: "Lovensdijkstraat",
-            house_number: 12,
-            date_of_birth: new Date("2005-04-17"),
-            role: "admin"
-        },{
-            id: "1",
-            first_name: "Jane",
-            last_name: "Smith",
-            password: "strongpass456",
-            email: "jane.smith@gmail.com",
-            streetname: "Main Street",
-            house_number: 12,
-            date_of_birth: new Date("1985-08-22"),
-            role: "guest"
-        },{
-            id: "2",
-            first_name: "Michael",
-            last_name: "Johnson",
-            password: "myp@ssword789",
-            email: "michael.johnson@live.com",
-            streetname: "Oak Avenue",
-            house_number: 8,
-            date_of_birth: new Date("1977-03-10"),
-            role:"guest"
-        },{
-            id: "3",
-            first_name: "Emily",
-            last_name: "Williams",
-            password: "emilyPass123",
-            email: "emily.williams@gmail.com",
-            streetname: "Cedar Lane",
-            house_number: 20,
-            date_of_birth: new Date("1995-12-05"),
-            role:"guest"
-        },{
-            id: "4",
-            first_name: "David",
-            last_name: "Miller",
-            password: "davidP@ssword",
-            email: "david.miller@live.com",
-            streetname: "Maple Street",
-            house_number: 15,
-            date_of_birth: new Date("1980-07-18"),
-            role:"guest"
-        },{
-            id: "5",
-            first_name: "Sophia",
-            last_name: "Brown",
-            password: "sophia456!",
-            email: "sophia.brown@gmail.com",
-            streetname: "Pine Road",
-            house_number: 7,
-            date_of_birth: new Date("1992-04-30"),
-            role:"guest"
+    constructor(
+        @InjectModel(User.name) private userModel: Model<UserDocument>,
+    ) {}
+
+    async findAll(): Promise<IUser[]> {
+        this.logger.log(`Finding all items`);
+        const items = await this.userModel.find().select('-password');
+        return items;
+    }
+
+    async findOne(_id: string): Promise<IUser | null> {
+        this.logger.log(`finding user with id ${_id}`);
+        const item = await this.userModel.findOne({ _id }).exec();
+        if (!item) {
+            this.logger.debug('Item not found');
         }
-
-          
-    ]);
-
-    getAll(): IUser[] {
-        Logger.log('getAll', this.TAG);
-        return this.user$.value;
+        return item;
+    }
+    findOneByEmail(email: string) {
+        this.logger.log(`Finding user by email ${email}`);
+        return this.userModel.findOne({ emailAddress: email });
+      }
+    async create(user: CreateUserDto): Promise<IUser> {
+        this.logger.log(`Create user ${user.firstName}`);
+        const createdItem = new this.userModel(user);
+        await createdItem.save();
+        this.logger.log(`Created user ${createdItem.firstName} ${createdItem.lastName}`);
+        return createdItem;
     }
 
-    getOne(id: string): IUser {
-        Logger.log(`getOne(${id})`, this.TAG);
-        const user = this.user$.value.find((td) => td.id === id);
-        if (!user) {
-            throw new NotFoundException(`User could not be found!`);
+    async update(_id: string, user: UpdateUserDto): Promise<IUser | null> {
+        this.logger.log(`Update user ${user.firstName}`);
+        return this.userModel.findByIdAndUpdate({ _id }, user);
+    }
+    async delete(_id: string): Promise<{ deleted: boolean; message?: string }> {
+        try {
+            const result = await this.userModel.deleteOne({ _id }).exec();
+            if (result.deletedCount === 0) {
+                this.logger.debug(`No user found to delete with id: ${_id}`);
+                return { deleted: false, message: 'No user found with that ID' };
+            }
+            this.logger.log(`Deleted user with id: ${_id}`);
+            return { deleted: true };
+        } catch (error) {
+            this.logger.error(`Error deleting user with id ${_id}: ${error}`);
+            throw error;
         }
-        return user;
     }
-
-    /**
-     * Update the arg signature to match the DTO, but keep the
-     * return signature - we still want to respond with the complete
-     * object
-     */
-    create(user: Pick<IUser,'first_name' | 'last_name' | 'password' | 'email' | 'streetname' | 'house_number' | 'date_of_birth' | 'role'>): IUser {
-        Logger.log('create', this.TAG);
-        const current = this.user$.value;
-        // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
-        const newUser: IUser = {
-            ...user,
-            id: `${Math.floor(Math.random() * 10000)}`,
-            first_name: "",
-            last_name: "",
-            password: "",
-            email: "",
-            streetname: "",
-            house_number: 0,
-            date_of_birth: new Date("0000-00-00"),
-            role:"guest"
-        };
-        this.user$.next([...current, newUser]);
-        return newUser;
-    }
+      
 }

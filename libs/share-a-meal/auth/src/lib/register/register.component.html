@@ -1,0 +1,183 @@
+<!-- user-create.component.html -->
+<div class="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div class="w-full max-w-2xl bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6 bg-white shadow px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <!-- First Name -->
+<div>
+    <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+    <input type="text" id="firstName" formControlName="firstName" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- First Name Validation Messages -->
+    <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)">
+      <div *ngIf="registerForm.get('firstName')?.errors?.['required']">
+        First name is required.
+      </div>
+      <div *ngIf="registerForm.get('firstName')?.errors?.['minlength']">
+        First name must be at least 3 characters long.
+      </div>
+    </div>
+  </div>
+  <!-- Last Name -->
+<div>
+    <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+    <input type="text" id="lastName" formControlName="lastName" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- Last Name Validation Messages -->
+    <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('lastName')?.errors?.['required']">
+        Last name is required.
+      </div>
+      <div *ngIf="registerForm.get('lastName')?.errors?.['minlength']">
+        Last name must be at least 3 characters long.
+      </div>
+    </div>
+  </div>
+  
+  
+      <!-- Email Address -->
+      <div>
+        <label for="emailAddress" class="block text-sm font-medium text-gray-700">Email Address</label>
+        <input type="email" id="emailAddress" formControlName="emailAddress" required class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+       <!-- Email Address Validation Messages -->
+  <div *ngIf="registerForm.get('emailAddress')?.invalid && registerForm.get('emailAddress')?.touched" class="text-red-600 text-sm">
+    <div *ngIf="registerForm.get('emailAddress')?.errors?.['required']">
+      Email address is required.
+    </div>
+    <div *ngIf="registerForm.get('emailAddress')?.errors?.['email']">
+      Please enter a valid email address.
+    </div>
+  </div>
+          </div>
+        </div>
+<!-- Password -->
+<div class="relative">
+    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+    <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md pr-10">
+    <!-- Password Validation Messages -->
+    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('password')?.errors?.['required']">
+        Password is required.
+      </div>
+      <div *ngIf="registerForm.get('password')?.errors?.['passwordInvalid']">
+        Password must be at least 8 characters long and include a mix of upper case, lower case, and numbers.
+      </div>
+    </div>
+  </div>
+  
+  
+  
+<!-- Birthdate -->
+<div>
+    <label for="birthdate" class="block text-sm font-medium text-gray-700">Birthdate</label>
+    <input type="date" formControlName="birthdate" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- Birthdate Validation Messages -->
+    <div *ngIf="registerForm.get('birthdate')?.invalid && registerForm.get('birthdate')?.touched" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('birthdate')?.errors?.['required']">
+        Birthdate is required.
+      </div>
+      <div *ngIf="registerForm.get('birthdate')?.errors?.['birthdateInvalid']">
+        Birthdate cannot be today or in the future.
+      </div>
+    </div>
+  </div>
+  
+  
+  
+ <!-- Postal Code -->
+<div>
+    <label for="postalCode" class="block text-sm font-medium text-gray-700">Postal Code</label>
+    <input type="text" formControlName="postalCode" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- Postal Code Validation Messages -->
+    <div *ngIf="registerForm.get('postalode')?.invalid" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('postalode')?.errors?.['required']">
+        Postal code is required.
+      </div>
+      <div *ngIf="registerForm.get('postalode')?.errors?.['postalCodeInvalid']">
+        Postal code must be in the format 1234 AB.
+      </div>
+    </div>
+  </div>
+  
+  
+<!-- House Number -->
+<div>
+    <label for="houseNumber" class="block text-sm font-medium text-gray-700">House Number</label>
+    <input type="text" id="houseNumber" formControlName="houseNumber" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- House Number Validation Messages -->
+    <div *ngIf="registerForm.get('houseNumber')?.invalid && (registerForm.get('houseNumber')?.dirty || registerForm.get('houseNumber')?.touched)" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('houseNumber')?.errors?.['required']">
+        House number is required.
+      </div>
+    </div>
+  </div>
+  
+ <!-- Phone Number -->
+<div>
+    <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+    <input type="text" formControlName="phoneNumber" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <!-- Phone Number Validation Messages -->
+    <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">
+        Phone number is required.
+      </div>
+      <div *ngIf="registerForm.get('phoneNumber')?.errors?.['phoneNumberInvalid']">
+        Phone number must be in the format 0123456789.
+      </div>
+    </div>
+  </div>
+  
+     <!-- Gender -->
+<div>
+    <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+    <select formControlName="gender" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+      <option value="null">Select gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+    <!-- Gender Validation Messages -->
+    <div *ngIf="registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('gender')?.errors?.['required']">
+        Gender selection is required.
+      </div>
+    </div>
+  </div>
+  
+  
+        <!-- Role -->
+<div class="sm:col-span-2">
+    <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</span>
+    <div class="flex items-center mb-4">
+      <input id="admin" type="radio" formControlName="role" value="admin" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 focus:ring-2 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" />
+      <label for="admin" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
+    </div>
+    <div class="flex items-center">
+      <input id="member" type="radio" formControlName="role" value="member" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 focus:ring-2 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+      <label for="member" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Member</label>
+    </div>
+    <!-- Role Validation Messages -->
+    <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="text-red-600 text-sm">
+      <div *ngIf="registerForm.get('role')?.errors?.['required']">
+        Selecting a role is required.
+      </div>
+    </div>
+  </div>
+  
+  
+       <!-- Submit Button -->
+  <button type="submit"class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-50" [disabled]="registerForm.invalid">Register</button>
+  
+  <!-- Login Link -->
+  <p class="text-sm font-light text-gray-500 dark:text-gray-400 text-center mt-6">
+      Already have an account? <a routerLink="../login" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Login here</a>
+  </p>
+    
+  </form>
+  <!-- JSON Object Display Section -->
+   <!-- <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">User JSON Data</h3>
+    <pre class="text-sm text-gray-600 dark:text-gray-400 overflow-x-auto">{{ registerForm.value | json }}</pre>
+  </div>
+   -->
+    </div>
+  </div>
+  
