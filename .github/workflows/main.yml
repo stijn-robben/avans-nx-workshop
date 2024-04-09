@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy a Node.js app and an Angular app to an Azure
 
 on:
@@ -43,6 +40,7 @@ jobs:
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
           cd ${GITHUB_WORKSPACE}/dist/apps/share-a-meal-web/ && zip ${GITHUB_WORKSPACE}/share-a-meal-web-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/stijns-burgers-web/browser && zip ${GITHUB_WORKSPACE}/stijns-burgers-web-release.zip ./* -r
 
       - name: Upload share-a-meal-web artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -55,6 +53,12 @@ jobs:
         with:
           name: data-api
           path: data-api-release.zip
+
+      - name: Upload stijns-burgers-web artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: stijns-burgers-web
+          path: stijns-burgers-web-release.zip
 
   deploy-data-api:
     runs-on: ubuntu-latest
@@ -114,3 +118,27 @@ jobs:
           app_location: '/' # App source code path
           api_location: '' # Api source code path - optional
           output_location: '' # Built app content directory - optional
+
+  deploy-stijns-burgers-web:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: stijns-burgers-web
+
+      - name: Unzip artifact for deployment
+        run: unzip stijns-burgers-web-release.zip
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'cwfr-stijn-robben'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }}
+          package: .
